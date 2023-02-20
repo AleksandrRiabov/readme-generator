@@ -35,6 +35,11 @@ inquirer
       name: 'projectUsage'
     },
     {
+      type: 'input',
+      message: 'If you want to include the screenshot, please add link or path. Otherwise press enter.',
+      name: 'projectScreenshot'
+    },
+    {
       type: 'list',
       message: 'What is this project license?',
       name: 'projectLicense',
@@ -67,30 +72,37 @@ const generateReadme = (response) => {
     githubName,
     projectUsage,
     projectContributing,
-    projectTests
+    projectTests,
+    projectScreenshot
 
   } = response;
 
   return `
-  [![License: MIT](https://img.shields.io/badge/License-${projectLicense}-yellow.svg)](https://opensource.org/licenses/${projectLicense})
 
-# ${projectName}
+  ${projectLicense && `[![License: MIT](https://img.shields.io/badge/License-${projectLicense}-yellow.svg)](https://opensource.org/licenses/${projectLicense})`}
+
+# ${projectName || 'Project Name'}
 
 ## Description 
- ${projectDescription}
+ ${projectDescription || 'Add some project description here..'}
 
 ## Table of Contents
 
-- [Installation](#Installation)
-- [Usage](#Usage)
-- [Questions](#Questions)
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
 - [License](#license)
+- [Contributing](#contributing)
+- [Questions](#questions)
 
 ## Installation
-Clone repository using <code> git clone ${projectUrl} </code> and run <code>${projectInstalation}</code> comand.
+Clone repository using <code> git clone ${projectUrl || 'repository'} </code> and run <code>${projectInstalation || '"npm install"'}</code> comand.
 
 ## Usage
-${projectUsage}
+${projectUsage || 'N/A'}
+
+${projectScreenshot && `### Screenshot `}
+${projectScreenshot && `![alt text](${projectScreenshot})`}
 
 ## License
 This projcet is licensed under **${projectLicense}** license.
@@ -104,6 +116,6 @@ ${projectTests}
 
 ## Questions
 
-If you have any questions, please ask [${githubName}](https://github.com/A${githubName}) 
+If you have any questions, please ask [${(githubName).replace(/\s/g, '')}](https://github.com/${(githubName).replace(/\s/g, '')}) 
   `
 }

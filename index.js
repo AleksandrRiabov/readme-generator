@@ -1,9 +1,11 @@
+// Require the necessary modules
 const inquirer = require('inquirer');
 const fs = require('fs')
 
-
+// Use Inquirer to prompt the user for input
 inquirer
   .prompt([
+    // Prompt for GitHub username, project name, and other information needed for README file
     {
       type: 'input',
       message: 'What is your GitHub name?',
@@ -57,12 +59,16 @@ inquirer
     }
   ])
   .then(res => {
+    // Write the contents of the README file to disk using the generateReadme function
     fs.writeFile('readme.md', generateReadme(res), error => {
       error ? console.log(error) : console.log('Readme file has been created');
     })
   });
 
+
+// Function to generate the contents of the README file based on user input
 const generateReadme = (response) => {
+  // Extract variables from the response object
   const {
     projectName,
     projectDescription,
@@ -77,8 +83,8 @@ const generateReadme = (response) => {
 
   } = response;
 
+  // Use template literals to generate the README file contents
   return `
-
   ${projectLicense && `[![License: MIT](https://img.shields.io/badge/License-${projectLicense}-yellow.svg)](https://opensource.org/licenses/${projectLicense})`}
 
 # ${projectName || 'Project Name'}
@@ -115,7 +121,6 @@ ${projectTests}
 
 
 ## Questions
-
 If you have any questions, please ask [${(githubName).replace(/\s/g, '')}](https://github.com/${(githubName).replace(/\s/g, '')}) 
-  `
+`
 }

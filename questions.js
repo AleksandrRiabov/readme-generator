@@ -7,6 +7,11 @@ const questions = [
   },
   {
     type: 'input',
+    message: 'What is your Email?',
+    name: 'email'
+  },
+  {
+    type: 'input',
     message: 'What is your project name?',
     name: 'projectName'
   },
@@ -29,6 +34,11 @@ const questions = [
     type: 'input',
     message: 'Provide some instructions how to use the app.',
     name: 'projectUsage'
+  },
+  {
+    type: 'input',
+    message: 'If you want to include the Walk Through Video, please add the link. Otherwise press enter.',
+    name: 'projectVideo'
   },
   {
     type: 'input',

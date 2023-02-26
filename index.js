@@ -28,7 +28,9 @@ const generateReadme = (response) => {
     projectUsage,
     projectContributing,
     projectTests,
-    projectScreenshot
+    projectScreenshot,
+    email,
+    projectVideo
 
   } = response;
 
@@ -45,13 +47,20 @@ const generateReadme = (response) => {
 
 - [Description](#description)
 - [Installation](#installation)
+${projectVideo && '- [Demo](#demo)'}
 - [Usage](#usage)
 - [License](#license)
 - [Contributing](#contributing)
 - [Questions](#questions)
 
+
 ## Installation
 Clone repository using <code> git clone ${projectUrl || 'repository'} </code> and run <code>${projectInstalation || '"npm install"'}</code> comand.
+
+${projectVideo &&
+    `## Demo
+  :point_right: [Short Walk Through Video](${projectVideo}) :point_left:`
+    }
 
 ## Usage
 ${projectUsage || 'N/A'}
@@ -70,5 +79,6 @@ ${projectTests}
 
 ## Questions
 If you have any questions, please ask [${(githubName).replace(/\s/g, '')}](https://github.com/${(githubName).replace(/\s/g, '')}) 
+or email at ${email}
 `
 }
